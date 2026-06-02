@@ -36,7 +36,7 @@ The server listens on `127.0.0.1:8080`. Cross-compile for a Raspberry Pi (arm64)
 GOOS=linux GOARCH=arm64 go build -trimpath -ldflags="-s -w" -o devstats .
 ```
 
-It binds to loopback by design: run it behind a reverse proxy or a [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/) so there are no open ports and TLS terminates at the edge.
+By default it binds to `127.0.0.1:8080`. Override with `LISTEN_ADDR` (for example `:8080` inside a container, then publish the port only to the host loopback). Run it behind a reverse proxy or a [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/) so there are no open ports and TLS terminates at the edge.
 
 ## Credits
 

@@ -5,6 +5,7 @@ import (
 	"errors"
 	"log"
 	"net/http"
+	"os"
 	"os/signal"
 	"syscall"
 	"time"
@@ -22,8 +23,13 @@ func main() {
 	mux := http.NewServeMux()
 	handlers.SetupRoutes(mux, devStatsService)
 
+	addr := os.Getenv("LISTEN_ADDR")
+	if addr == "" {
+		addr = "127.0.0.1:8080"
+	}
+
 	srv := &http.Server{
-		Addr:    "127.0.0.1:8080",
+		Addr:    addr,
 		Handler: mux,
 	}
 
