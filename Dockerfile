@@ -1,4 +1,7 @@
-FROM golang:1.26-bookworm AS builder
+FROM --platform=$BUILDPLATFORM golang:1.26-bookworm AS builder
+
+ARG TARGETOS
+ARG TARGETARCH
 
 # Create and change to the app directory.
 WORKDIR /app
@@ -12,8 +15,8 @@ RUN go mod download
 # Copy local code to the container image.
 COPY . ./
 
-# Build the binary.
-RUN go build -o server
+# Build the binary for the target platform.
+RUN CGO_ENABLED=0 GOOS=$TARGETOS GOARCH=$TARGETARCH go build -trimpath -ldflags="-s -w" -o server
 
 # Use the official Debian slim image for a lean production container.
 # https://hub.docker.com/_/debian
