@@ -40,9 +40,9 @@ func ScoreHandler(devStatsService *service.DevStatsService) http.HandlerFunc {
 			Score:      user.Contribution,
 			PRs:        user.PRCount,
 			Issues:     user.IssueCount,
-			TitleColor: "#0086FF",
-			TextColor:  "#555555",
-			Radius:     10,
+			TitleColor: "#58a6ff",
+			TextColor:  "#8b949e",
+			Radius:     12,
 		})
 
 		w.Header().Set("Cache-Control", "public, max-age=7200")
