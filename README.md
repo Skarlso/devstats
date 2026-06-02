@@ -14,12 +14,26 @@ Add this to your README and swap in your GitHub username:
 
 The server queries the CNCF DevStats API and returns an `image/svg+xml` card showing your DevStats score, pull requests, and issues. Responses are cached for two hours.
 
+### Themes
+
+Add `&theme=` to pick a palette. Defaults to `dark`; an unknown value falls back to `dark`.
+
+```markdown
+[![DevStats](https://devstats.app/?username=skarlso&theme=light)](https://github.com/Skarlso/devstats)
+```
+
+| Theme   | Description            |
+|---------|------------------------|
+| `dark`  | Dark gradient (default). |
+| `light` | Light, GitHub-light palette. |
+| `cncf`  | Purple gradient. |
+
 ## Endpoints
 
-| Method | Path                  | Description              |
-|--------|-----------------------|--------------------------|
-| GET    | `/?username=<id>`     | Render the card.         |
-| GET    | `/health`             | Liveness check, `OK`.    |
+| Method | Path                             | Description              |
+|--------|----------------------------------|--------------------------|
+| GET    | `/?username=<id>&theme=<theme>`  | Render the card.         |
+| GET    | `/health`                        | Liveness check, `OK`.    |
 
 ## Running it yourself
 

@@ -8,20 +8,20 @@ import (
 )
 
 func TestGenerateSVG(t *testing.T) {
+	dark := models.ThemeByName("dark")
 	out := GenerateSVG(models.CardData{
-		Score:      1234567,
-		PRs:        42,
-		Issues:     7,
-		TitleColor: "#0086FF",
-		TextColor:  "#555555",
-		Radius:     10,
+		Score:  1234567,
+		PRs:    42,
+		Issues: 7,
+		Theme:  dark,
 	})
 
 	wants := []string{
 		"<svg",
 		"CNCF DevStats",
-		"#0086FF",
-		"#555555",
+		dark.Title,
+		dark.Value,
+		dark.BgBottom,
 		"1,234,567",
 	}
 	for _, want := range wants {
@@ -31,8 +31,21 @@ func TestGenerateSVG(t *testing.T) {
 	}
 }
 
+func TestGenerateSVGUsesTheme(t *testing.T) {
+	light := models.ThemeByName("light")
+	out := GenerateSVG(models.CardData{Score: 1, Theme: light})
+
+	if !strings.Contains(out, light.BgTop) {
+		t.Errorf("light background %q not applied\n%s", light.BgTop, out)
+	}
+	dark := models.ThemeByName("dark")
+	if strings.Contains(out, dark.BgTop) {
+		t.Errorf("dark background %q leaked into light card", dark.BgTop)
+	}
+}
+
 func TestGenerateSVGFormatsLargeNumbers(t *testing.T) {
-	out := GenerateSVG(models.CardData{Score: 1000000})
+	out := GenerateSVG(models.CardData{Score: 1000000, Theme: models.ThemeByName("dark")})
 	if !strings.Contains(out, "1,000,000") {
 		t.Errorf("score not comma-formatted\n%s", out)
 	}

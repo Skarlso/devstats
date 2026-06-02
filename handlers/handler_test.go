@@ -106,6 +106,32 @@ func TestScoreHandlerSetsCacheHeaders(t *testing.T) {
 	}
 }
 
+func TestScoreHandlerSelectsTheme(t *testing.T) {
+	tests := []struct {
+		name      string
+		target    string
+		wantColor string
+	}{
+		{"defaults to dark", "/?username=skarlso", models.ThemeByName("dark").Title},
+		{"explicit dark", "/?username=skarlso&theme=dark", models.ThemeByName("dark").Title},
+		{"light theme", "/?username=skarlso&theme=light", models.ThemeByName("light").Title},
+		{"unknown falls back to dark", "/?username=skarlso&theme=nope", models.ThemeByName("dark").Title},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			rec := httptest.NewRecorder()
+			req := httptest.NewRequest(http.MethodGet, tt.target, nil)
+
+			newTestMux(&fakeClient{}).ServeHTTP(rec, req)
+
+			if !strings.Contains(rec.Body.String(), tt.wantColor) {
+				t.Errorf("body missing theme color %q", tt.wantColor)
+			}
+		})
+	}
+}
+
 func TestHealthHandler(t *testing.T) {
 	rec := httptest.NewRecorder()
 	req := httptest.NewRequest(http.MethodGet, "/health", nil)

@@ -36,13 +36,13 @@ func ScoreHandler(devStatsService *service.DevStatsService) http.HandlerFunc {
 			return
 		}
 
+		theme := models.ThemeByName(strings.ToLower(r.URL.Query().Get("theme")))
+
 		card := svg.GenerateSVG(models.CardData{
-			Score:      user.Contribution,
-			PRs:        user.PRCount,
-			Issues:     user.IssueCount,
-			TitleColor: "#58a6ff",
-			TextColor:  "#8b949e",
-			Radius:     12,
+			Score:  user.Contribution,
+			PRs:    user.PRCount,
+			Issues: user.IssueCount,
+			Theme:  theme,
 		})
 
 		w.Header().Set("Cache-Control", "public, max-age=7200")

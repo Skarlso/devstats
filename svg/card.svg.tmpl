@@ -1,15 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="380" height="190" viewBox="0 0 380 190" fill="none" role="img" aria-label="CNCF DevStats card">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#1b2430"/>
-      <stop offset="1" stop-color="#0d1117"/>
+      <stop offset="0" stop-color="{{.Theme.BgTop}}"/>
+      <stop offset="1" stop-color="{{.Theme.BgBottom}}"/>
     </linearGradient>
   </defs>
   <style>
     text { font-family: 'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif; }
-    .title { font-size: 22px; font-weight: 700; fill: {{.TitleColor}}; }
-    .label { font-size: 15px; font-weight: 400; fill: {{.TextColor}}; }
-    .value { font-size: 16px; font-weight: 700; fill: #e6edf3; }
+    .title { font-size: 22px; font-weight: 700; fill: {{.Theme.Title}}; }
+    .label { font-size: 15px; font-weight: 400; fill: {{.Theme.Label}}; }
+    .value { font-size: 16px; font-weight: 700; fill: {{.Theme.Value}}; }
     .row { animation: fadeIn 0.5s ease-in-out both; }
     @keyframes fadeIn {
       from { opacity: 0; }
@@ -17,13 +17,13 @@
     }
   </style>
 
-  <rect x="0.5" y="0.5" width="379" height="189" rx="{{.Radius}}" fill="url(#bg)" stroke="#30363d"/>
+  <rect x="0.5" y="0.5" width="379" height="189" rx="{{.Theme.Radius}}" fill="url(#bg)" stroke="{{.Theme.Border}}"/>
 
   <text x="24" y="40" class="title">CNCF DevStats</text>
-  <line x1="24" y1="54" x2="356" y2="54" stroke="#21262d" stroke-width="1"/>
+  <line x1="24" y1="54" x2="356" y2="54" stroke="{{.Theme.Divider}}" stroke-width="1"/>
 
   <g class="row" style="animation-delay: 150ms" transform="translate(24, 86)">
-    <svg x="0" y="-15" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{.TitleColor}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <svg x="0" y="-15" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{.Theme.Title}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <path d="M3 3v16a2 2 0 0 0 2 2h16"/>
       <path d="M18 17V9"/>
       <path d="M13 17V5"/>
@@ -34,7 +34,7 @@
   </g>
 
   <g class="row" style="animation-delay: 300ms" transform="translate(24, 124)">
-    <svg x="0" y="-15" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{.TitleColor}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <svg x="0" y="-15" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{.Theme.Title}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="18" cy="18" r="3"/>
       <circle cx="6" cy="6" r="3"/>
       <path d="M13 6h3a2 2 0 0 1 2 2v7"/>
@@ -45,7 +45,7 @@
   </g>
 
   <g class="row" style="animation-delay: 450ms" transform="translate(24, 162)">
-    <svg x="0" y="-15" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{.TitleColor}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <svg x="0" y="-15" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{.Theme.Title}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="12" cy="12" r="10"/>
       <circle cx="12" cy="12" r="1"/>
     </svg>
