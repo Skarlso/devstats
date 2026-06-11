@@ -54,4 +54,4 @@ By default it binds to `127.0.0.1:8080`. Override with `LISTEN_ADDR` (for exampl
 
 ## Credits
 
-Based on the original [tico88612/devstats-card](https://github.com/tico88612/devstats-card) which was abandoned.
+Based on the original [tico88612/devstats-card](https://github.com/tico88612/devstats-card) that I thought is defunct but actually it's not. :D Go check out [tico88612](https://github.com/tico88612).
